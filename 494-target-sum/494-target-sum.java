@@ -10,7 +10,6 @@ class Solution {
             return 0; // not possible to reach this sum 
         }
         
-        
         int[] table = new int[2 * sum + 1]; // + 1 to check number of ways to reach sum 0
         table[sum] = 1; // ways to reach sum or -sum = same sign for all = 1 way
         
