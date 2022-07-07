@@ -28,7 +28,7 @@ class Solution {
             
             int size = currentLevel.size();
             
-            // check even odd of first item in case of only 1 item in node (and since our loop won't check)
+            // check even odd of first item in case of only 1 item in level (and since our loop won't check)
             if ((levelEven && currentLevel.get(0).val % 2 == 0) ||
                 (!levelEven &&  currentLevel.get(0).val % 2 != 0)) {
                 return false;
@@ -57,7 +57,6 @@ class Solution {
                     currentLevel.add(item.right);
             }
             
-            // currentLevel.addAll(nextLevel);
             levelEven = !levelEven;
         }
 
