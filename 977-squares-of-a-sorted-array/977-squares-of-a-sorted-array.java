@@ -1,10 +1,9 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
-        int n = nums.length;
-        int[] result = new int[n];
+        int[] result = new int[nums.length];
         int l = 0;
-        int r = n - 1;
-        int idx = n - 1;
+        int r = nums.length - 1;
+        int idx = nums.length - 1;
         
         while (l <= r)
             if (Math.abs(nums[l]) > Math.abs(nums[r]))
