@@ -2,7 +2,7 @@
 class Monarch {
     String name;
     public boolean alive = true;
-    public ArrayList<Monarch> children = new ArrayList<>();
+    public List<Monarch> children = new ArrayList<>();
     
     public Monarch(String name) {
         this.name = name;
@@ -15,7 +15,7 @@ class Monarch {
 class ThroneInheritance {
     Monarch OGMonarch; 
     HashMap<String, Monarch> royalDirectory = new HashMap<>();
-    
+    List<String> rankingOfKings = new ArrayList<>();
     
     public ThroneInheritance(String kingName) {
         this.OGMonarch = new Monarch(kingName);
@@ -34,19 +34,18 @@ class ThroneInheritance {
     
     public List<String> getInheritanceOrder() {
         // return non dead people using DFS
-        List<String> rankingOfKings = getRankingOfKings(this.OGMonarch, new ArrayList<String>());
+        this.rankingOfKings.clear();
+        this.updateRankingOfKings(this.OGMonarch);    
+        
         return rankingOfKings;
     }
     
-    public List<String> getRankingOfKings(Monarch nextInLine, List<String> rankingOfKings) {
-        
+    public void updateRankingOfKings(Monarch nextInLine) {
         if(nextInLine.alive)
-            rankingOfKings.add(nextInLine.name);
+            this.rankingOfKings.add(nextInLine.name);
         
         for(Monarch child: nextInLine.children)
-            getRankingOfKings(child, rankingOfKings);
-        
-        return rankingOfKings;
+            updateRankingOfKings(child);
     }
     
 }
