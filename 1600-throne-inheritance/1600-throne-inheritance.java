@@ -1,50 +1,37 @@
 
-class Monarch {
-    String name;
-    public boolean alive = true;
-    public List<Monarch> children = new ArrayList<>();
-    
-    public Monarch(String name) {
-        this.name = name;
-    }
-        
-}
-
-
-
 class ThroneInheritance {
-    Monarch OGMonarch; 
-    HashMap<String, Monarch> royalDirectory = new HashMap<>();
-    List<String> rankingOfKings = new ArrayList<>();
+    String OGMonarch;
+    HashMap<String, List<String>> royalDirectory = new HashMap<>();
+    HashSet<String> theDead = new HashSet<>();
+    ArrayList<String> rankingOfKings = new ArrayList<>();
     
     public ThroneInheritance(String kingName) {
-        this.OGMonarch = new Monarch(kingName);
-        this.royalDirectory.put(kingName, this.OGMonarch);
+        this.OGMonarch = kingName;
+        this.royalDirectory.put(kingName, new ArrayList());
     }
     
     public void birth(String parentName, String childName) {
-        Monarch longLiveTheNewKing = new Monarch(childName);
-        this.royalDirectory.get(parentName).children.add(longLiveTheNewKing);
-        this.royalDirectory.put(childName, longLiveTheNewKing);
+        this.royalDirectory.get(parentName).add(childName);
+        this.royalDirectory.put(childName, new ArrayList());
     }
     
     public void death(String name) {
-        this.royalDirectory.get(name).alive = false;
+        this.theDead.add(name);
     }
     
     public List<String> getInheritanceOrder() {
         // return non dead people using DFS
         this.rankingOfKings.clear();
-        this.updateRankingOfKings(this.OGMonarch);    
+        this.updateRankingOfKings(this.OGMonarch);
         
         return rankingOfKings;
     }
     
-    public void updateRankingOfKings(Monarch nextInLine) {
-        if(nextInLine.alive)
-            this.rankingOfKings.add(nextInLine.name);
+    public void updateRankingOfKings(String nextInLine) {
+        if(!this.theDead.contains(nextInLine))
+            this.rankingOfKings.add(nextInLine);
         
-        for(Monarch child: nextInLine.children)
+        for(String child: this.royalDirectory.get(nextInLine))
             updateRankingOfKings(child);
     }
     
