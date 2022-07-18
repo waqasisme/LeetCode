@@ -7,17 +7,15 @@ class Solution {
         HashMap<Character, Character> t2s = new HashMap();
         
         for(int i = 0; i < s.length(); i++) {
-            char _s = s.charAt(i);
-            char _t = t.charAt(i);
             
-            if(s2t.containsKey(_s) && s2t.get(_s) != _t)
+            if(s2t.containsKey(s.charAt(i)) && s2t.get(s.charAt(i)) != t.charAt(i))
                 return false;
             
-            if(t2s.containsKey(_t) && t2s.get(_t) != _s)
+            if(t2s.containsKey(t.charAt(i)) && t2s.get(t.charAt(i)) != s.charAt(i))
                 return false;
             
-            s2t.putIfAbsent(_s, _t);
-            t2s.putIfAbsent(_t, _s);
+            s2t.putIfAbsent(s.charAt(i), t.charAt(i));
+            t2s.putIfAbsent(t.charAt(i), s.charAt(i));
             
         }
             
