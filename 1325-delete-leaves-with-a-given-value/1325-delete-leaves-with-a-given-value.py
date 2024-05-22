@@ -12,7 +12,7 @@ class Solution:
         root.left = self.removeLeafNodes(root.left, target)
         root.right = self.removeLeafNodes(root.right, target)
 
-        if not root.left and not root.right and root.val == target:
+        if root.val == target and (not root.left and not root.right):
             return None
 
         return root
